@@ -13,11 +13,11 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 export class HomeComponent implements OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  olympics$: Observable<Olympic[]> = this.olympicService.getOlympics();
+  olympics$: Observable<Olympic[] | null> = this.olympicService.getOlympics();
 
   transformedOlympics$ = this.olympics$
     .pipe(
-      map((data) => this.transformData(data)),
+      map((data) => (data ? this.transformData(data) : [])),
       takeUntil(this.destroy$)
     )
     .subscribe((data) => (this.transformedOlympics = data));
