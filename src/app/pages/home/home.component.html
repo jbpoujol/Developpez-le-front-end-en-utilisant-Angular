@@ -1,5 +1,31 @@
-<h2>Olympic games app</h2>
-<hr />
-
-<p-chart type="pie" [data]="data"></p-chart>
-<button type="button" pButton (click)="update($event)">Update</button>
+<h1
+  class="mx-auto text-center bg-cyan-600 text-white mt-5 border-round max-w-23rem py-3"
+>
+  Medals per Country
+</h1>
+<div class="flex justify-content-around">
+  <div
+    class="border-2 border-cyan-600 border-solid border-round p-2 flex flex-column text-center"
+  >
+    <span class="font-light">Number of JOs</span>
+    <span class="font-bold">10</span>
+  </div>
+  <div
+    class="border-2 border-cyan-600 border-solid border-round p-2 flex flex-column text-center"
+  >
+    <span class="font-light">Number of Country</span>
+    <span class="font-bold">10</span>
+  </div>
+</div>
+<div class="flex justify-content-center">
+  <ngx-charts-pie-chart
+    [view]="[700, 400]"
+    [scheme]="'cool'"
+    [results]="transformedOlympics"
+    [legend]="false"
+    [labels]="true"
+    [doughnut]="false"
+    (select)="onSelect($event)"
+  >
+  </ngx-charts-pie-chart>
+</div>

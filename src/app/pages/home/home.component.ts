@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, Subject, map, takeUntil } from 'rxjs';
+import { Olympic } from 'src/app/core/models/Olympic';
+import { OlympicTransformed } from 'src/app/core/models/OlympicTransformed.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
@@ -7,37 +10,39 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  public olympics$: Observable<any> = of(null);
+export class HomeComponent implements OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  data: any;
-  constructor(private olympicService: OlympicService) {
-    this.data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-        },
-      ],
-    };
+  olympics$: Observable<Olympic[]> = this.olympicService.getOlympics();
+
+  transformedOlympics$ = this.olympics$
+    .pipe(
+      map((data) => this.transformData(data)),
+      takeUntil(this.destroy$)
+    )
+    .subscribe((data) => (this.transformedOlympics = data));
+
+  transformedOlympics: Array<OlympicTransformed>;
+
+  constructor(private olympicService: OlympicService, private router: Router) {}
+
+  onSelect(data: any): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    this.router.navigate(['/details', data.name]);
   }
 
-  ngOnInit(): void {}
+  transformData(data: Olympic[]): OlympicTransformed[] {
+    return data.map((countryData) => ({
+      name: countryData.country,
+      value: countryData.participations.reduce(
+        (total, participation) => total + participation.medalsCount,
+        0
+      ),
+    }));
+  }
 
-  update(event: Event) {
-    this.data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'First Dataset',
-          data: [23, 67, 97, 56, 45, 23, 47],
-        },
-        {
-          label: 'Second Dataset',
-          data: [29, 20, 56, 98, 34, 47, 47],
-        },
-      ],
-    };
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
