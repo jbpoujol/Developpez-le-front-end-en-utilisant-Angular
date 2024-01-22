@@ -1,6 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  map,
+  tap,
+  throwError,
+} from 'rxjs';
 import { Olympic } from '../models/Olympic';
 
 @Injectable({
@@ -23,9 +30,17 @@ export class OlympicService {
     return this.olympics$.asObservable();
   }
 
-  /* getOlympics(): Observable<Olympic[]> {
-    return this.http.get<Olympic[]>(this.olympicUrl);
-  } */
+  getOlympicsByCountryName(countryName: string): Observable<Olympic | null> {
+    return this.getOlympics().pipe(
+      map((data) => {
+        if (!data) {
+          return null;
+        }
+        const found = data.find((olympic) => olympic.country === countryName);
+        return found || null;
+      })
+    );
+  }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
