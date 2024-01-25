@@ -2,6 +2,15 @@
   <p-progressBar mode="indeterminate"></p-progressBar>
 </div>
 
-<div class="h-screen mx-2">
-  <router-outlet></router-outlet>
+<div *ngIf="isOnoline$ | async; else offline">
+  <div class="h-screen mx-2">
+    <router-outlet></router-outlet>
+  </div>
 </div>
+<ng-template #offline>
+  <p-messages severity="warn">
+    <ng-template pTemplate>
+      <div class="ml-2">You're offline</div>
+    </ng-template>
+  </p-messages>
+</ng-template>

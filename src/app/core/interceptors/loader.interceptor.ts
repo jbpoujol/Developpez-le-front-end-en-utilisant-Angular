@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { delay, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LoaderService } from '../services/loader.service';
 
 @Injectable()
@@ -20,7 +20,8 @@ export class LoaderInterceptor implements HttpInterceptor {
     this.loaderService.show();
 
     return next.handle(req).pipe(
-      delay(2000),
+      // This delay is for testing purposes only
+      //  delay(2000),
       finalize(() => this.loaderService.hide())
     );
   }

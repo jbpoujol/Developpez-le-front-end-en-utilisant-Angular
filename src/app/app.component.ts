@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { take } from 'rxjs';
 import { LoaderService } from './core/services/loader.service';
+import { NetworkService } from './core/services/network.service';
 import { OlympicService } from './core/services/olympic.service';
 import { ViewSizeService } from './core/services/view-size.service';
 @Component({
@@ -11,12 +12,14 @@ import { ViewSizeService } from './core/services/view-size.service';
 })
 export class AppComponent implements OnInit {
   isLoading$ = this.loaderService.loaderState;
+  isOnoline$ = this.networkService.isOnline;
 
   constructor(
     private primengConfig: PrimeNGConfig,
     private olympicService: OlympicService,
     private viewSizeService: ViewSizeService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private networkService: NetworkService
   ) {}
 
   ngOnInit() {
