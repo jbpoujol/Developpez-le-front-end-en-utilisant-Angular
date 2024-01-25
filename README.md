@@ -1,29 +1,59 @@
-# OlympicGamesStarter
+Bien sûr, je vais rédiger un modèle de README pour votre projet Angular utilisant Angular 14, PrimeNG, PrimeFlex, et ng-charts. Ce README fournira des informations essentielles sur le projet, y compris une brève description, les instructions d'installation et d'utilisation, ainsi que d'autres détails pertinents. Vous pouvez le personnaliser davantage pour l'adapter à vos besoins spécifiques.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+```markdown
+# Dashboard des Médailles Olympiques
 
-Don't forget to install your node_modules before starting (`npm install`).
+Ce projet Angular offre un tableau de bord interactif pour visualiser les performances des pays aux Jeux Olympiques. Utilisant Angular 14, PrimeNG, PrimeFlex, et ng-charts, l'application présente des informations détaillées sur les médailles olympiques par pays et par édition des Jeux.
 
-## Development server
+## Fonctionnalités
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Dashboard (Page d'accueil)** : Présente un graphique interactif montrant le nombre total de médailles par pays. Un clic sur un pays redirige vers une page de détails.
+- **Page Détail** : Affiche les performances d'un pays sélectionné aux Jeux Olympiques, y compris le nombre total de participations, de médailles et d'athlètes, ainsi qu'un graphique historique des médailles.
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Pour installer et exécuter ce projet, suivez ces étapes :
 
-## Where to start
+1. Clonez le dépôt :
+   ```
+   git clone https://github.com/jbpoujol/Developpez-le-front-end-en-utilisant-Angular.git
+   ```
+2. Accédez au dossier du projet :
+   ```
+   cd src
+   ```
+3. Installez les dépendances :
+   ```
+   npm install
+   ```
+4. Lancez l'application :
+   ```
+   ng serve
+   ```
+5. Ouvrez votre navigateur à l'adresse `http://localhost:4200/`.
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+## Technologies Utilisées
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+- [Angular 14](https://angular.io/)
+- [PrimeNG](https://www.primefaces.org/primeng/)
+- [PrimeFlex](https://www.primefaces.org/primeflex/)
+- [ng-charts](https://valor-software.com/ng2-charts/)
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+## Structure du Projet
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+- `src/app/dashboard`: Contient le composant de la page d'accueil et la logique du graphique des médailles.
+- `src/app/pages/details`: Gère l'affichage des détails par pays, y compris les graphiques historiques des médailles.
+- `src/app/core/services`: Services pour la récupération et la gestion des données olympiques.
+- `src/app/core/models`: Modèles de données utilisés dans l'application.
 
-You're now ready to implement the requested features.
+## Contribution
 
-Good luck!
+Les contributions à ce projet sont les bienvenues. Veuillez suivre les bonnes pratiques de développement Angular et documenter clairement toutes les modifications ou ajouts.
+
+## Contact
+
+Pour toute question ou suggestion, n'hésitez pas à me contacter. 
+
+---
+
+©Jean-Baptiste Poujol - Projet Dashboard des Médailles Olympiques
