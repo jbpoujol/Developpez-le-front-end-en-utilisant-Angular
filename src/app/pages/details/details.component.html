@@ -1,54 +1,70 @@
-<p-button
-  label="Back"
-  icon="pi pi-chevron-left"
-  iconPos="left"
-  styleClass="m-2"
-  routerLink="/"
-></p-button>
-<h1
-  class="mx-auto text-center bg-cyan-600 text-white mt-2 border-round max-w-23rem py-3"
->
-  {{ olympicDataForCountry?.country }}
-</h1>
-<div class="flex justify-content-around">
-  <div
-    class="border-2 border-cyan-600 border-solid border-round p-2 flex flex-column text-center"
+<ng-container *ngIf="olympicDataForCountry; else noCountry">
+  <p-button
+    label="Back"
+    icon="pi pi-chevron-left"
+    iconPos="left"
+    styleClass="m-2"
+    routerLink="/"
+  ></p-button>
+  <h1
+    class="mx-auto text-center bg-cyan-600 text-white mt-2 border-round max-w-23rem py-3"
   >
-    <span class="font-light">Number of entries</span>
-    <span class="font-bold">{{
-      olympicDataForCountry?.participations?.length
-    }}</span>
+    {{ olympicDataForCountry.country }}
+  </h1>
+  <div class="flex justify-content-around">
+    <div
+      class="border-2 border-cyan-600 border-solid border-round p-2 flex flex-column text-center"
+    >
+      <span class="font-light">Number of entries</span>
+      <span class="font-bold">{{
+        olympicDataForCountry.participations.length
+      }}</span>
+    </div>
+    <div
+      class="border-2 border-cyan-600 border-solid border-round p-2 flex flex-column text-center"
+    >
+      <span class="font-light">Total number medals</span>
+      <span class="font-bold">{{
+        getTotalMedals(olympicDataForCountry.participations)
+      }}</span>
+    </div>
+    <div
+      class="border-2 border-cyan-600 border-solid border-round p-2 flex flex-column text-center"
+    >
+      <span class="font-light">Total number of athletes</span>
+      <span class="font-bold">{{
+        getTotalAthletes(olympicDataForCountry.participations)
+      }}</span>
+    </div>
   </div>
-  <div
-    class="border-2 border-cyan-600 border-solid border-round p-2 flex flex-column text-center"
-  >
-    <span class="font-light">Total number medals</span>
-    <span class="font-bold">{{
-      getTotalMedals(olympicDataForCountry?.participations)
-    }}</span>
+  <div class="my-4 flex justify-content-center" *ngIf="olympicDataForCountry">
+    <ngx-charts-line-chart
+      [view]="view"
+      [scheme]="'cool'"
+      [legend]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [xAxisLabel]="'Dates'"
+      [timeline]="true"
+      [autoScale]="true"
+      [results]="participationsTransformed"
+    >
+    </ngx-charts-line-chart>
   </div>
+</ng-container>
+<ng-template #noCountry>
   <div
-    class="border-2 border-cyan-600 border-solid border-round p-2 flex flex-column text-center"
+    class="flex flex-column justify-content-center align-items-center h-full"
   >
-    <span class="font-light">Total number of athletes</span>
-    <span class="font-bold">{{
-      getTotalAthletes(olympicDataForCountry?.participations)
-    }}</span>
+    <h1 class="text-xl">No country selected</h1>
+    <p-button
+      label="Back"
+      icon="pi pi-chevron-left"
+      iconPos="left"
+      styleClass="m-2"
+      routerLink="/"
+    ></p-button>
   </div>
-</div>
-<div class="my-4 flex justify-content-center" *ngIf="olympicDataForCountry">
-  <ngx-charts-line-chart
-    [view]="view"
-    [scheme]="'cool'"
-    [legend]="false"
-    [showXAxisLabel]="true"
-    [showYAxisLabel]="true"
-    [xAxis]="true"
-    [yAxis]="true"
-    [xAxisLabel]="'Dates'"
-    [timeline]="true"
-    [autoScale]="true"
-    [results]="participationsTransformed"
-  >
-  </ngx-charts-line-chart>
-</div>
+</ng-template>

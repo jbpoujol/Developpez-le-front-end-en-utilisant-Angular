@@ -4,8 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ButtonModule } from 'primeng/button';
-import { MessageModule } from 'primeng/message';
-import { MessagesModule } from 'primeng/messages';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,8 +27,6 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ButtonModule,
     NgxChartsModule,
     ProgressBarModule,
-    MessagesModule,
-    MessageModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },

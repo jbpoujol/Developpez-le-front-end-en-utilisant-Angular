@@ -36,8 +36,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
         .getOlympicsByCountryName(this.countryName)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data) => {
-          this.olympicDataForCountry = data;
           if (data) {
+            this.olympicDataForCountry = data;
             this.participationsTransformed =
               this.transformParticipationsToOlympicTransformed(data);
           }
