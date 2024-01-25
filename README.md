@@ -1,6 +1,3 @@
-Bien sûr, je vais rédiger un modèle de README pour votre projet Angular utilisant Angular 14, PrimeNG, PrimeFlex, et ng-charts. Ce README fournira des informations essentielles sur le projet, y compris une brève description, les instructions d'installation et d'utilisation, ainsi que d'autres détails pertinents. Vous pouvez le personnaliser davantage pour l'adapter à vos besoins spécifiques.
-
-```markdown
 # Dashboard des Médailles Olympiques
 
 Ce projet Angular offre un tableau de bord interactif pour visualiser les performances des pays aux Jeux Olympiques. Utilisant Angular 14, PrimeNG, PrimeFlex, et ng-charts, l'application présente des informations détaillées sur les médailles olympiques par pays et par édition des Jeux.
