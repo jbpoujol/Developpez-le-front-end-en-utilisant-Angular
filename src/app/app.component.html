@@ -2,7 +2,7 @@
   <p-progressBar mode="indeterminate"></p-progressBar>
 </div>
 
-<div *ngIf="isOnoline$ | async; else offline">
+<div *ngIf="isOnline$ | async; else offline">
   <div class="h-screen mx-2">
     <router-outlet></router-outlet>
   </div>

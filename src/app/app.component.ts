@@ -12,7 +12,7 @@ import { ViewSizeService } from './core/services/view-size.service';
 })
 export class AppComponent implements OnInit {
   isLoading$ = this.loaderService.loaderState;
-  isOnoline$ = this.networkService.isOnline;
+  isOnline$ = this.networkService.isOnline;
 
   constructor(
     private primengConfig: PrimeNGConfig,
