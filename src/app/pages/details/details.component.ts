@@ -5,6 +5,8 @@ import { Olympic } from 'src/app/core/models/Olympic';
 import { Participation } from 'src/app/core/models/Participation';
 import { ParticipationTransformed } from 'src/app/core/models/ParticipationTransformed.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { ViewSizeService } from 'src/app/core/services/view-size.service';
+import { viewType } from 'src/app/core/types/view.type';
 
 @Component({
   selector: 'app-details',
@@ -19,9 +21,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   participationsTransformed: ParticipationTransformed[];
 
+  view: viewType;
+
   constructor(
     private route: ActivatedRoute,
-    private olympicService: OlympicService
+    private olympicService: OlympicService,
+    private viewSizeService: ViewSizeService
   ) {}
 
   ngOnInit() {
@@ -38,6 +43,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
           }
         });
     }
+
+    this.getViewSize();
+  }
+
+  getViewSize() {
+    this.viewSizeService
+      .getViewSize()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((viewSize) => (this.view = viewSize));
   }
 
   getTotalMedals(participations?: Participation[]): number {

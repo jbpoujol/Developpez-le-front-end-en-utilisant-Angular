@@ -4,6 +4,8 @@ import { Observable, Subject, map, takeUntil } from 'rxjs';
 import { Olympic } from 'src/app/core/models/Olympic';
 import { OlympicTransformed } from 'src/app/core/models/OlympicTransformed.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { ViewSizeService } from 'src/app/core/services/view-size.service';
+import { viewType } from 'src/app/core/types/view.type';
 
 @Component({
   selector: 'app-home',
@@ -22,9 +24,20 @@ export class HomeComponent implements OnDestroy {
     )
     .subscribe((data) => (this.transformedOlympics = data));
 
+  viewSize$ = this.viewSizeService
+    .getViewSize()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((viewSize) => (this.view = viewSize));
+
   transformedOlympics: Array<OlympicTransformed>;
 
-  constructor(private olympicService: OlympicService, private router: Router) {}
+  view: viewType;
+
+  constructor(
+    private olympicService: OlympicService,
+    private viewSizeService: ViewSizeService,
+    private router: Router
+  ) {}
 
   onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
